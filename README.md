@@ -28,6 +28,7 @@ The data is also stored in this respository as:
 
 ### Structure of the Code
 
+<pre>
 - "app" folder
 | - "template" folder
 | |- master.html  # main page of web app
@@ -44,7 +45,7 @@ The data is also stored in this respository as:
 |- classifier.pkl  # saved model 
 
 - README.md # The readme containing this very line ;)
-
+</pre>
 
 
 ### Instructions for locally hosting the app:
