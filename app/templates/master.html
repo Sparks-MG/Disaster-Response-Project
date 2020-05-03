@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Disasters</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Disaster Response Project</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="https://www.udacity.com/">Made in cooperation with Udacity</a></li>
+				<li><a href="https://appen.com/datasets/combined-disaster-response-data/">Original Dataset</a></li>
+                <li><a href="https://github.com/Sparks-MG">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Disaster Response Project</h1>
+        <p class="text-center">Analyse text messages for disaster response with this classification model</p>
+        <hr />
+      
+        <div class="row">
+            <div class="col-lg-12 form-group-lg">
+                <form action="/go" method="get">
+                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a message to classify">
+                    <div class="col-lg-offset-5">
+                        <button type="submit" class="btn btn-lg btn-success">Classify Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% block message %}
+        {% endblock %}
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+        <div class="page-header">
+            <h1 class="text-center">Information on the Dataset behind the Classification</h1>
+        </div>
+    {% endblock %}
+
+    {% for id in ids %}
+        <div id="{{id}}"></div>
+    {% endfor %}
+</div>
+
+<script type="text/javascript">
+    const graphs = {{graphJSON | safe}};
+    const ids = {{ids | safe}};
+    for(let i in graphs) {
+        Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
+    }
+</script>
+
+<div class="page-header">
+     <p class="text-center">The distribution of the messages over the categories is quite asymetric. This limits the ability to classify certain categories properly.</p>
+</div>
+
+<div class="container">
+        <div class="page-header">
+            <h1 class="text-center">Information on the Model behind the Classification</h1>
+			<p class="text-left">The classifcation model was build on a multiclassifcation extended randomforest algorithm as implemented in Pythons Scikit-learn library. The hyperparameters were carefully tuned with Scikit-learns Gridsearch. The number of trees was limited to 100, as the metrics indicate only minor improval for a larger number of trees while generating a larger binary. The corresponding Github Respository is linked above at the contact tab.</p>
+        </div>
+</div>
+
+
+
+</body>
+</html>
