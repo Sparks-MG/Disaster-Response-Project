@@ -83,7 +83,7 @@ The data is also stored in this respository as:
 
 ### Information on the classification model
 
-The classication iw based on Scikit-Learns implementation of the random forest algorithm, which was extended with the MultioutputClassifier for multi label classification.
+The classication is based on Scikit-Learns implementation of the random forest algorithm, which was extended with the MultioutputClassifier for multi label classification.
 The model was implemented in a ML pipeline and carefully optimized with Scikit-Learns Gridsearch algorithm. While random forest is known for efficiency while not being prone to overfitting, its drawback is that with rising number of trees the file size of the model rises correspondendly. This was somewhat countered by employing the __joblib__ library, which uses more efficient ways to serialize the model and  reduces the file size to a fifth.
 
 
